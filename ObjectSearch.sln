@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectSearch", "ObjectSearch\ObjectSearch.csproj", "{47952573-5047-46CD-889D-3F9078C001D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YOLOv4", "YOLOv4\YOLOv4.csproj", "{78CA8E7E-4B65-4663-8ADD-9255F691A824}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47952573-5047-46CD-889D-3F9078C001D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47952573-5047-46CD-889D-3F9078C001D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47952573-5047-46CD-889D-3F9078C001D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47952573-5047-46CD-889D-3F9078C001D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78CA8E7E-4B65-4663-8ADD-9255F691A824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78CA8E7E-4B65-4663-8ADD-9255F691A824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78CA8E7E-4B65-4663-8ADD-9255F691A824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78CA8E7E-4B65-4663-8ADD-9255F691A824}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C35A5B50-D591-4515-8531-850AE53BF9D7}
+	EndGlobalSection
+EndGlobal
