@@ -1,0 +1,69 @@
+﻿<Window x:Class="ObjectStorage.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ViewModel="clr-namespace:ObjectStorage.ViewModel"
+        xmlns:Convertor="clr-namespace:ObjectStorage.Converters"
+        xmlns:View="clr-namespace:ObjectStorage.View"
+        Icon="./../Files/ObjectStorage-icon.png"
+        Title="Хранилище объектов" Height="900" Width="1300" MouseLeftButtonDown="Drag_Window"   ShowInTaskbar="True" WindowStartupLocation="CenterScreen"  FontFamily="Georgia" Background="Transparent"  Style="{DynamicResource MainWindowStyle}" x:Name="window" TabIndex="0" Foreground="#FFFFFFFF">
+    <Window.CommandBindings>
+        <CommandBinding Command="Close" Executed="CloseCommand_Executed"/>
+        <CommandBinding Command="{x:Static SystemCommands.MinimizeWindowCommand}" CanExecute="CommandBinding_CanExecute_1" Executed="MiniMize_Execute" />
+    </Window.CommandBindings>
+    <Window.Resources>
+        <Convertor:ImageToSourceConverter x:Key="ImageSourceConverter">
+        </Convertor:ImageToSourceConverter>
+        <DataTemplate DataType="{x:Type ViewModel:SearchControlViewModel}">
+            <View:SearchControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:StorageTableControlViewModel}">
+            <View:StorageTableControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:GallaryControlViewModel}">
+            <View:GallaryControl/>
+        </DataTemplate>
+
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Expander Name="expanderParam" Header="Хранилище" IsExpanded="True" Margin="10,180,10,400" >
+            <ListBox x:Name="ListBoxStorageObjects" Grid.Column="0" ItemsSource="{Binding StorageMenu}" RenderTransformOrigin="0.51,0.18" Height="166" SelectionChanged="ListBoxStorageObjects_SelectionChanged" Margin="20,0,13,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding Icon,Converter={StaticResource ImageSourceConverter}}" Width="25" />
+                            <TextBlock Text="{Binding Name}" Padding="5"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Expander>
+        <Expander Header="Поиск объектов" IsExpanded="True" Width="150" Margin="10,480,10,58" >
+            <ListBox x:Name="ListBoxObjects"
+        	ItemsSource="{Binding ObjectMenu}"
+             Width="150"  Margin="0,0,-2,0" SelectionChanged="ListBoxObjects_SelectionChanged" Height="211" RenderTransformOrigin="0.493,0.527" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding Icon,Converter={StaticResource ImageSourceConverter}}" Width="25" />
+                            <TextBlock Text="{Binding Name}" Padding="10"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Expander>
+        <Border Grid.Column="1" Margin="0" BorderBrush="#FF202020"   BorderThickness="3,0,0,0">
+            <ContentControl Name="pnlcontent" Height="750" Margin="0,24,10,24" />
+        </Border>
+
+    </Grid>
+</Window>

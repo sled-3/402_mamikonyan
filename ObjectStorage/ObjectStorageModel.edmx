@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ObjectStorageModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Foto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Hash" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="YoloObject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Hash" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="X1" Type="float" Nullable="false" />
+          <Property Name="Y1" Type="float" Nullable="false" />
+          <Property Name="X2" Type="float" Nullable="false" />
+          <Property Name="Y2" Type="float" Nullable="false" />
+          <Property Name="Confidence" Type="float" Nullable="false" />
+          <Property Name="FotoId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_YoloObject_Foto">
+          <End Role="Foto" Type="Self.Foto" Multiplicity="1" />
+          <End Role="YoloObject" Type="Self.YoloObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Foto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="YoloObject">
+              <PropertyRef Name="FotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ObjectStorageModelContainer">
+          <EntitySet Name="Foto" EntityType="Self.Foto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="YoloObject" EntityType="Self.YoloObject" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_YoloObject_Foto" Association="Self.FK_YoloObject_Foto">
+            <End Role="Foto" EntitySet="Foto" />
+            <End Role="YoloObject" EntitySet="YoloObject" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ObjectStorageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Foto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Hash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="YoloObject" Relationship="Self.FK_YoloObject_Foto" FromRole="Foto" ToRole="YoloObject" />
+        </EntityType>
+        <EntityType Name="YoloObject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Hash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="X1" Type="Double" Nullable="false" />
+          <Property Name="Y1" Type="Double" Nullable="false" />
+          <Property Name="X2" Type="Double" Nullable="false" />
+          <Property Name="Y2" Type="Double" Nullable="false" />
+          <Property Name="Confidence" Type="Double" Nullable="false" />
+          <Property Name="FotoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Foto" Relationship="Self.FK_YoloObject_Foto" FromRole="YoloObject" ToRole="Foto" />
+        </EntityType>
+        <Association Name="FK_YoloObject_Foto">
+          <End Role="Foto" Type="Self.Foto" Multiplicity="1" />
+          <End Role="YoloObject" Type="Self.YoloObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Foto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="YoloObject">
+              <PropertyRef Name="FotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ObjectStorageEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Foto" EntityType="Self.Foto" />
+          <EntitySet Name="YoloObject" EntityType="Self.YoloObject" />
+          <AssociationSet Name="FK_YoloObject_Foto" Association="Self.FK_YoloObject_Foto">
+            <End Role="Foto" EntitySet="Foto" />
+            <End Role="YoloObject" EntitySet="YoloObject" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ObjectStorageModelContainer" CdmEntityContainer="ObjectStorageEntities">
+          <EntitySetMapping Name="Foto">
+            <EntityTypeMapping TypeName="ObjectStorageModel.Foto">
+              <MappingFragment StoreEntitySet="Foto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="YoloObject">
+            <EntityTypeMapping TypeName="ObjectStorageModel.YoloObject">
+              <MappingFragment StoreEntitySet="YoloObject">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+                <ScalarProperty Name="X1" ColumnName="X1" />
+                <ScalarProperty Name="Y1" ColumnName="Y1" />
+                <ScalarProperty Name="X2" ColumnName="X2" />
+                <ScalarProperty Name="Y2" ColumnName="Y2" />
+                <ScalarProperty Name="Confidence" ColumnName="Confidence" />
+                <ScalarProperty Name="FotoId" ColumnName="FotoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
